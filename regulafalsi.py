@@ -6,6 +6,7 @@
                             4. Ganang Setyo Hadi (2208107010052)
                             5. Muhammad Khalid Al Ghifari (2208107010044)
                             6. Alfi Zamriza (2208107010080)
+                            7. Maulana Fikri (2208107010042)
     Kelas               : Komputasi Numerik (B)
     Judul Program       : Metode Regula Falsi
                                                                                             """
