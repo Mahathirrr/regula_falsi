@@ -1,27 +1,24 @@
+"""
+    Kelompok            : 1
+    Anggota             :   1. Muhammad Mahathir (2208107010056)
+                            2. Muhammad Raza Adzani (2208107010066)
+                            3. Athar Rayyan Muhammad (2208107010074)
+                            4. Ganang Setyo Hadi (2208107010052)
+                            5. Muhammad Khalid Al Ghifari (2208107010044)
+                            6. Alfi Zamriza (2208107010080)
+    Kelas               : Komputasi Numerik (B)
+    Judul Program       : Metode Regula Falsi
+                                                                                            """
 from tkinter import *
 from tkinter import messagebox
 
 
+# Fungsi untuk menghitung nilai persamaan
 def f(x, p):
     return eval(p)
 
 
-def print_results(data):
-    for i in range(len(data)):
-        for j in range(len(data[0])):
-            entry = Entry(f4, width=10, font=("Helvetica Neue", 12), justify="center")
-            entry.grid(row=i, column=j)
-            entry.insert(0, data[i][j])
-
-
-def conclusion(iteration, error, root):
-    result = "Kesimpulan\n\n"
-    result += f"Setelah {iteration} iterasi, nilai ERROR lebih kecil dari {error}.\n"
-    result += f"Maka iterasi dihentikan dan diperoleh solusi persamaan non-linier yang diinginkan:\n"
-    result += f"APROKSIMASI AKAR = {root:.6f}"
-    messagebox.showinfo("Kesimpulan", result)
-
-
+# Fungsi untuk memeriksa syarat terpenuhi untuk iterasi
 def check_condition():
     persamaan = str(ent_persamaan.get())
     batas_bawah = float(ent_batas_bawah.get())
@@ -40,6 +37,7 @@ def check_condition():
                                                       "Silakan cari selang baru...")
 
 
+# Fungsi untuk menghitung akar persamaan dengan metode Regula Falsi
 def calculate():
     btn_calculate["state"] = DISABLED
     btn_reset["state"] = NORMAL
@@ -82,6 +80,25 @@ def calculate():
         i += 1
 
 
+# Fungsi untuk menampilkan hasil perhitungan dalam bentuk tabel
+def print_results(data):
+    for i in range(len(data)):
+        for j in range(len(data[0])):
+            entry = Entry(f4, width=10, font=("Helvetica Neue", 12), justify="center")
+            entry.grid(row=i, column=j)
+            entry.insert(0, data[i][j])
+
+
+# Fungsi untuk menampilkan kesimpulan perhitungan
+def conclusion(iteration, error, root):
+    result = "Kesimpulan\n\n"
+    result += f"Setelah {iteration} iterasi, nilai ERROR lebih kecil dari {error}.\n"
+    result += f"Maka iterasi dihentikan dan diperoleh solusi persamaan non-linier yang diinginkan:\n"
+    result += f"APROKSIMASI AKAR = {root:.6f}"
+    messagebox.showinfo("Kesimpulan", result)
+
+
+# Fungsi untuk mereset semua input dan tampilan
 def reset():
     btn_check_condition["state"] = NORMAL
     btn_reset["state"] = DISABLED
@@ -95,26 +112,27 @@ def reset():
         widget.destroy()
 
 
+# Inisialisasi GUI menggunakan tkinter
 root = Tk()
 root.title("Metode Regula Falsi")
-root.geometry("750x600")
+root.geometry("900x600")
 root.configure(bg="#E5E5E5")
 
+# Membuat beberapa frame untuk tata letak elemen GUI
 f1 = Frame(root, width=600, height=50, bg="#E5E5E5")
 f1.pack(side=TOP, pady=16)
-
 f2 = Frame(root, width=600, height=100, bg="#E5E5E5")
 f2.pack(side=TOP, pady=16)
-
 f3 = Frame(root, width=600, height=50, bg="#E5E5E5")
 f3.pack(side=TOP, pady=16)
-
 f4 = Frame(root, width=600, height=350, bg="#E5E5E5")
 f4.pack(side=TOP, pady=16)
 
+# Label judul aplikasi
 lbl_title = Label(f1, font=("Helvetica Neue", 16, "bold"), text="Metode Regula Falsi", bg="#E5E5E5")
 lbl_title.pack()
 
+# Label dan input untuk persamaan, toleransi error, batas bawah, dan batas atas
 lbl_persamaan = Label(f2, text="Persamaan", font=("Helvetica Neue", 12), bg="#E5E5E5")
 lbl_persamaan.grid(row=0, column=0, sticky="w")
 ent_persamaan = Entry(f2, font=("Helvetica Neue", 12), justify="right")
@@ -135,16 +153,20 @@ lbl_batas_atas.grid(row=1, column=2, padx=(20, 0), sticky="w")
 ent_batas_atas = Entry(f2, font=("Helvetica Neue", 12), justify="right")
 ent_batas_atas.grid(row=1, column=3, pady=4)
 
+# Tombol "Syarat" untuk memeriksa syarat terpenuhi
 btn_check_condition = Button(f3, text="Syarat", width=16, command=check_condition, bd=0, relief="solid", padx=10,
                              pady=5, borderwidth=2, bg="#FF9800")
 btn_check_condition.grid(row=0, column=1)
 
+# Tombol "Hitung" untuk melakukan perhitungan
 btn_calculate = Button(f3, text="Hitung", width=16, command=calculate, bd=0, relief="solid", padx=10, pady=5,
                        borderwidth=2, bg="#FF9800", state=DISABLED)
 btn_calculate.grid(row=0, column=2, padx=(8, 8))
 
+# Tombol "Reset" untuk mereset input dan tampilan
 btn_reset = Button(f3, text="Reset", width=16, command=reset, bd=0, relief="solid", padx=10, pady=5, borderwidth=2,
                    bg="#FF9800", state=DISABLED)
 btn_reset.grid(row=0, column=3)
 
+# Memulai aplikasi tkinter
 root.mainloop()
